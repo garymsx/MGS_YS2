@@ -1,0 +1,150 @@
+;[gain=1.0 name=YS2G_17 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 145
+#title { "Palace of Salmon"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+
+@e0  = {1, 0, f }
+@e1  = {1, 0, fedcbc }
+
+@e10 = {2, 0, eca86420 }
+@e11 = {2,10, fdb975310 }
+@e12 = {2, 0, fedcba9876543210 }
+
+@e20  = {1, 0, fedcba}
+
+;* ベル
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = {14, 6,15, 2, 3, 0, 1, 6, 0, 0, 0, 0, 1
+             ,15, 2, 3, 0, 0, 2, 0, 0, 0, 0, 0}
+
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v16 = {18, 5,15, 2, 1, 0, 1, 1, 0, 0, 0, 0, 0
+             ,15, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0}
+
+*0 = {y6,255y7,255}
+
+9A [
+9 @16 H5,1,2,2 V13 O4 L16
+A @16 H5,1,2,2 V11 O5 L16 \-1
+9A e4.ab>c8.d8.e8d4.cd<b2>c4.<bae2>d4.cdedc<bab>cd
+9A e4.ab>c8.d8.e8d4.<b>cd2c4.<bab8.a8.g8 a1
+9A <e4.ab>c8.d8.e8d4.cd<b2>c4.<bae2>d4.cdedc<bab>cd
+9A e4.ab>c8.d8.e8d4.<b>cd8.c8.<b8a4.b>cd8.g8.b8a1
+9A    @16 <f2&f<a>cfafcfg2d8.e8.f8e4.dec2
+9     @15  a4.ab>c2<
+A     @15 )a4.ab>c2<(
+9A    @16 f2&f<a>cfafcfg2b4>d4c8.<b8.a8&a2
+9     @15 a8.g8.e8.d8.c8<a8>
+A     @15 )a8.g8.e8.d8.c8<a8>(
+9A    @16 f2&f<a>cfafcfg2d8.e8.f8e4.dec2
+9     @15 a4.ab>c2<
+A     @15 )a4.ab>c2<(
+9A    @16 f2&f<a>cfafcfg2b4>d4e1&e1
+9A ]0
+
+B [
+B r16
+B L16 \1 @16 V12 H5,1,2,2 O4
+B e4.ab>c8.d8.e8d4.cd<b2>c4.<bae2>d4.cdedc<bab>cd
+B e4.ab>c8.d8.e8d4.<b>cd4.r)<a4.gfg8.f8.d8 e1(
+B r16 <
+B e4.ab>c8.d8.e8d4.cd<b2>c4.<bae2>d4.cdedc<bab>cd
+B e4.ab>c8.d8.e8d4.<b>cd8.c8.<b)f4.gab8.>d8.g8e1(
+B @16 r <f2&f<a>cfafcfg2d8.e8.f8e4.dec4.&c
+B @15 e4.eg+a2
+B @16 r f2&f<a>cfafcfg2b4>d8.<a8.g8.e8&e2
+B @15 e8.d8.c8.<b8.a8e8
+B @16 r >f2&f<a>cfafcfg2d8.e8.f8e4.dec4.&c
+B @15 e4.eg+a2
+B @16 r f2&f<a>cfafcfg4.&gg4b4b1&b1
+B ]0
+
+
+DE [
+D L16 @13 V13 O2         
+E L16 @14 V13 O2 @e20 \1
+DE [ [ araa]4
+DE [ grgg]4
+DE [ frff]4
+DE [ grgg]2
+DE [ eree]2
+DE [ araa]4
+DE [ grgg]4
+DE [ frff]2
+DE [ grgg]2
+DE [ araa]4
+DE ]2
+DE ffff>f<ff>fr2<gggg>g<gg>gr2cccc>c<cc>cr2<<aaaa>a<aa>a<gggg>g<gg>g
+DE <ffff>f<ff>fr2<gggg>g<gg>gr2<aaaa>a<aa>ar2<aaaa>a<aa>a<gggg>g<gg>g
+DE <ffff>f<ff>fr2<gggg>g<gg>gr2cccc>c<cc>cr2<<aaaa>a<aa>a<gggg>g<gg>g
+DE <ffff>f<ff>fr2<gggg>g<gg>gr2< [ eree]8
+DE ]0
+
+F Y14,35
+F [
+F L16    V14 H0,20,0,-15 O4 Q1 SO
+F [r1]7 r2. gec<a>
+F [r1]7 r2  g32g32gggeecc
+F [r1]8
+F [r1]7     gecgecgeg32g32gggeecc
+F ]0
+
+2 r16
+12 [
+1 L16 @e1 V13 O4
+2 L16 @e1 V11 O4 \1
+12 r4 e4a8.b8.>c8<b4g4d8.g8.b8a2c4.fag2g+2
+12 a4e4a8.b8.>c8<b4.gab8.>c8.d8<f4.gag8.a8.b8aeab>c<b>cdedegaec<a
+12 r4e4a8.b8.>c8<b4g4d8.g8.b8a2c4.fag2g+2
+12 a4e4a8.b8.>c8<b4.gab8.>c8.d8<f4.gag8.a8.b8aeab>c<b>cdedegaec<a
+12 f8.c8.f8.a8.g8f8g2r<b>dgbagb  >c2&c_<c2 <a>ceacea>c<ea>ce<a>cea
+12 <f8.c8.f8.a8.g8f8g2r<b>dgbagb a2&a_<a2 a>ceacea>c<ea>ce<a>cea
+12 <f8.c8.f8.a8.g8f8g2r<b>dgbagb >c2&c_<c2 <a>ceacea>c<ea>ce<a>cea
+12 <f8.c8.f8.a8.g8f8g2r<b>dgbagb g+2&g+_<g+2 g+b>eg+<b>eg+beg+b>e<g+b>eg+
+12 ]0
+
+3 [
+3 L16 @e10 V13 O4
+3 [ cccc @e11 c @e10 ccc]7 ccccc @e11 ccc @e10
+3 [ cccc @e11 c @e10 ccc]7 @e11 cc @e10 c @e11 c @e11 @e12 cccc @e10
+3 [ cccc @e11 c @e10 ccc]7 cccc @e11 cccc @e10
+3 [ cccc @e11 c @e10 ccc]7 @e12 c32c32ccccccc
+3 [
+3   [ @e10 cccc @e11 c @e10 ccc @e11cr8.cr8.]3
+3   | [ @e10 cccc @e11 c @e10 cc @e11 c]2
+3 ]4
+3 @e12 ccccccccc32c32ccccccc
+3 ]0

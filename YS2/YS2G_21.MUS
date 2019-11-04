@@ -1,0 +1,144 @@
+;[gain=1.0 name=YS2G_21 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 110
+#title { "Pressure Road"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e2  = {1, 0, feedddcccbbbaaa }
+
+@e10 = {2,14, fe0=60}
+@e11 = {2,10, fe0=60}
+@e12 = {2, 2, fe0=60}
+
+;* 太鼓？ティンパニ
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = {12, 0,15, 4, 4, 0, 1, 1, 0, 0, 0, 0, 1
+             ,15, 1, 2, 0, 0, 1, 0, 0, 0, 0, 0}
+
+;* UFO
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v16 = {20, 5,15, 1,15, 0, 1, 1, 1, 1, 0, 0, 1
+             ,10, 2, 8, 0, 0,12, 1, 1, 0, 0, 1}
+
+;* バスドラム
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v17 = { 0, 0,15,10,15, 0, 0, 4, 0, 0, 0, 0, 0
+             ,15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+;* ノイズ
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v18 = { 2, 6,15, 2, 2, 0, 0,14, 1, 0, 0, 0, 0
+             ,15, 1, 1, 0, 0, 2, 1, 0, 0, 0, 0}
+
+1 V3 @e2 L16
+2 V1 @e2 L16 \2 r
+12 [O1 aaararaaaa araraaV+]4
+12 [ gggrgrg ggggrgrggV+]4
+12 [0
+12 [aaararaaaaararaa]4
+12 [gggrgrgggggrgrgg]4
+12 ]
+
+3 V3 @e10 L16 o3
+3 [r @e10 c4.&c @e12c4 @e11c4 V+]8
+3 [0
+3 [@e10c2 @e12c4 @e11c4]4
+3 ]
+
+
+*90= { @15 V14 H0,90,0,-5 O2 Q8 }
+*A0= { @15 V14 H0,90,0,-5 O2 Q8 \20 }
+*91= { @16 V13 H0,1,0,8 O4 }
+*A1= { @16 V11 H0,1,0,8 O4 \4}
+*92= { @17 V11 H0,60,0,-5 O2 Q8 }
+*A2= { @17 V8  H0,60,0,-5 O2 Q8 \20 }
+*93= { @18 V13 H0,2,0,-30 O3 }
+*A3= { @18 V11 H0,2,0,-30 O3 \4}
+
+9  *90 L16
+A  *A0 L16
+9A [c4V-2c4V+2]16
+9A [
+9  *90
+A  *A0
+9A c4 c16 
+9  *91
+A  *A1
+9A a+32V-a+32e32c32V+e32V-e32V11
+9  *90
+A  *A0
+9A c4V-2c4V+2c8
+9  *92
+A  *A2
+9A [c64V-2c64V+2]4
+9  *90
+A  *A0
+9A c4V-2c4V+2
+9  *93
+A  *A3
+9A g8
+9  *90
+A  *A0
+9A V-2c8V+2
+9A c16
+9  *93
+A  *A3
+9A g8V-V-
+9  *90
+A  *A0
+9A c16V+2c16
+9  *93
+A  *A3
+9A g8.
+9  *90
+A  *A0
+9A [c4V-2c4V+2]3 
+9A ]0
+
+B V3 @2 L16 H0,1,0,5 O2
+B [a>cegfde<b>dc<ba+a>edeV+<]4
+B [ga+>dfd+cd<a>c<ba+ag>dcd<V+]4
+B [0
+B [a>cegfde<b>dc<ba+a>ede<]4
+B [ga+>dfd+cd<a>c<ba+ag>dcd<]4
+B ]
+
+E V3 @11 L16 H0,20,0,-40 Q4 O3
+E [a>cegfde<b>dc<ba+a>edeV+<]4
+E [ga+>dfd+cd<a>c<ba+ag>dcd<V+]4
+E [0
+E [a>cegfde<b>dc<ba+a>ede<]4
+    E [ga+>dfd+cd<a>c<ba+ag>dcd<]4
+E ]

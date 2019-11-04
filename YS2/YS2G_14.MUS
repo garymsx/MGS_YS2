@@ -1,0 +1,96 @@
+;[gain=1.0 name=YS2G_14 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 135
+#title { "Inside of The Ice Wall"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e2  = {1, 0, feeddccbbaa9988776655443322110 }
+@e3  = {1, 0, ff=5,f8=60}
+
+@e20 = {0, 0, df}
+
+;* ベル
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = {25, 6,15, 3, 0, 3, 0, 6, 0, 0, 0, 0, 1
+             ,15, 3, 0, 3, 0, 2, 0, 0, 0, 0, 0}
+
+*0 = {Y6,255Y7,255}
+*1 = {Y14,32}
+
+B  r16
+9AB [
+9  L16 V13 @15 O5
+A  L16 V11 @15 O6 \-1
+B  L16 V11 @15 O5 \1
+9AB r2 g2f2d2e2.d8e8f2g4f4
+9AB e2g2f2d2e2.d8e8f4a4g4f4
+9AB ]0
+
+DE [
+D L16 V13 @13 O3
+E L16 V13 @14 O3 @e20 \1
+DE [ e8r8e8e8]2
+DE [ d8r8d8d8]2
+DE [ e8r8e8e8]2
+DE [ d8r8d8d8]2
+DE [ e8r8e8e8]2
+DE [ d8r8d8d8]2
+DE [ e8r8e8e8]2
+DE [ d8r8d8d8]2
+DE ]0
+
+1 [
+1 L16 @e3 V12 H10,1,2,2 O4
+1 e4a4>e4<a4g4a+4>d2<e4a4>e4<a4>d4<a+4g2
+1 e4a4>e4<a4g4a+4>d4f4e4d4<a4>c4d2<b2
+1 ]0
+
+2 [
+2 L16 @e3 \1 V10 H10,1,2,2 r8 O4
+2 e4a4>e4<a4g4a+4>d2<e4a4>e4<a4>d4<a+4g2
+2 e4a4>e4<a4g4a+4>d4f4e4d4<a4>c8<g2g2
+2 ]0
+
+3 [
+3 L16 @e2 V12 O3
+3 [ e8r8e8e8]2
+3 [ d8r8d8d8]2
+3 [ e8r8e8e8]2
+3 [ d8r8d8d8]2
+3 [ e8r8e8e8]2
+3 [ d8r8d8d8]2
+3 [ e8r8e8e8]2
+3 [ d8r8d8d8]2
+3 ]0

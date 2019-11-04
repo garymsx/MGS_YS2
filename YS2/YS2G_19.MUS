@@ -1,0 +1,18 @@
+;[gain=1.0 name=YS2G_19 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+
+#tempo 100
+#title { "Bell"}
+
+;       TL FB AR DR SL RR KL MT AM VB EG KR DT
+@v15 = {33, 0,13, 1, 0, 1, 0, 4, 0, 0, 1, 0, 1
+             ,13, 3, 3, 2, 3,15, 0, 0, 1, 0, 0}
+
+9  V15 \0 @15 O2 [b4e2((]3
+A  V15 \0 @15 O2 [g4d2((]3
+B  V15 \0 @15 O1 [a4&a2((]3

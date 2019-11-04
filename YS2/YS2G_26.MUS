@@ -1,0 +1,135 @@
+;[gain=1.0 name=YS2G_26 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 85
+#title { "A Still Time"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+#alloc {b=2000}
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e3  = {1, 0, f8=150 }
+@e4  = {1, 0, feeeeddddccccbbbb }
+
+;* ベル
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v18 = { 5, 4,15, 1, 1, 1, 3, 7, 0, 0, 0, 0, 1
+             ,15, 2, 1, 3, 0, 1, 0, 0, 0, 0, 0}
+
+2 r32.
+1  V6 @e4 HF
+2  V4 @e4 HF \1
+12 [[O5c16<a16>c16V+e16c16<a16>c16V-e16]2V+]4
+12  [d16<a+16>d16V+f16d16<a+16>d16V-f16]2V+
+12  [c16<a+16>c16V+e16c16<a+16>c16V-e16]2V+c16<a16>c16e16
+12  [c16<a16>c16e16]5c+16<a+16>c+16f16c+16<a+16>c+16e16
+12  [c16<a16>c16e16]16 [d16<a+16>d16f16]4 [c16<a+16>c16e16]4
+12 [
+1  V11 @e3
+2  V9  @e3
+12 [d+2.&d+8d16d+16]3 g+8g8f8d+4d8d+8
+12 f8d2.f8d8d4.d+8&d+2c2<b2>d16d+16d16d+16d4&
+12 d16d+16V-d16d+16V-d16d+16V-d16d+16 V+3[d8&V-]8
+1  V10 @e4 HF
+2  V8  @e4 HF \1
+12 [[O5c16<a16>c16e16c16<a16>c16e16]2]4
+12  [d16<a+16>d16f16d16<a+16>d16f16]2
+12  [c16<a+16>c16e16c16<a+16>c16e16]2c16<a16>c16e16
+12  [c16<a16>c16e16]5c+16<a+16>c+16f16c+16<a+16>c+16e16
+12  [c16<a16>c16e16]16 [d16<a+16>d16f16]4 [c16<a+16>c16e16]4
+12 ]0
+
+3 V6 @e4 HF
+3 [[O4a16e16a16V+>c16<a16e16a16V->c16]2V+]4
+3 [<a+16g16a+16V+>d16<a+16g16a+16V->d16]2
+3 [<a+16g16a+16V+>c16<a+16g16a+16V->c16]2V+<a16e16a16>c16V-
+3 [<a16e16a16>c16]5<a+16g16a+16>c+16<a+16g16a+16>c+16
+3 [<a16e16a16>c16]16[<a+16g16a+16>d16]4[<a+16g16a+16>c16]4
+3 [
+3 V11 @e3
+3 <[a+2.&a+8g16a+16]2a+2.&a+8g+16>c16f8d8<a+8g+4
+3 g8g+8b8a+2.>d8<a+8g4.a+8&a+2g+2g+2a+1 [a+8&V-]8
+3 V8 @e4
+3 [[O4a16e16a16>c16<a16e16a16>c16]2]4
+3 [<a+16g16a+16>d16<a+16g16a+16>d16]2
+3 [<a+16g16a+16>c16<a+16g16a+16>c16]2<a16e16a16>c16
+3 [<a16e16a16>c16]5<a+16g16a+16>c+16<a+16g16a+16>c+16
+3 [<a16e16a16>c16]16[<a+16g16a+16>d16]4[<a+16g16a+16>c16]4
+3 ]0
+
+A r32.
+9A [
+9  V14 @11 H10,1,2,2 O5
+A  V11 @11 H10,1,2,2 O5 \1
+9A [f32.a32>c32.d+64e16&e32.&e2&e8d16e16 d4.<b64>c16..&c2<]2
+9A >e64f2.&f16..e16f16 g+64a16..g4f4d+64e16..f8g8
+9A d+64e16..d16c8.&c4<a8>c8d8 d+64e16.. d16 c16&c4 e64f8... d+64e8...
+9A [d+32e2.&e16.d16e16d4.<b64>c16.&c64&c2]2
+9A e64f16..&f2. e16f16 g+64a16..g4f4e8f8 f+64g16..
+9  V11 @18 H10,1,2,2 O4
+A  V9  @18 H10,1,2,2 O4
+9A g2.&g8d+8c2.&c8<a+8>c2.&c8g8
+9  V12 @18 H10,1,2,2 O4
+A  V10  @18 H10,1,2,2 O4
+9A f2a+8b4.a+2g4f4g4.a+8&a+2
+9A d+2d+2d16d+16d16d+16d2&
+9A d16d+16d16d+16 c+32d2....
+9A ]0
+
+C r32.
+BC [
+BC [r1]17
+B  V11 @18 H10,1,2,2 O4
+C  V9  @18 H10,1,2,2 O4 \1
+BC d2f2 g2d2 <a+4.>d+8&d+2
+BC r1 r1 r1
+BC ]0
+
+
+DE [r1]7
+D  @13 V14 H10,1,2,2
+E  @14 V11 H10,1,2,2 \1
+DE [
+DE O2 )f2c2(
+DE [)f8(>c8e8f8>c8e4.<<]2
+DE [)d8(a8>d8e8f8>c4.<<]2
+DE g8>d8f+8g8a+8>d4.<<
+DE )c8(a+8>c8d8e8a+4.<d+8a+8>d8d+8g8>d4.<<
+DE )c8d+8(g8>c8d+8a+4.<g+8>d+8f8g+8>c8d+4.<<
+DE a+8>d8f8g8b8>d4.<<g8>d8f8g8a+8>d4.<<
+DE )c8(g8>c8d8d+8a+4.<g+8>g+8
+DE >c8d+8<<g+8>g+8b8>d+8<d+1d+1<
+DE [)f8(>c8e8f8>c8e4.<<]2[)d8(a8>d8e8f8>c4.<<]2
+DE g8>d8f+8g8a+8>d4.<<)c8(g8>c8d8e8a+4.<f8>c8e8f8
+DE a8>c4.
+DE ]0

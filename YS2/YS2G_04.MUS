@@ -1,0 +1,86 @@
+;[gain=1.0 name=YS2G_04 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 108
+#title { "Apathetic Story"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e1  = {1, 0, fedcbc }
+
+@e30 = {0, 0, fed}
+
+;* ピアノ
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = {22, 6,15, 2, 2, 0, 1, 2, 0, 0, 0, 0, 0
+             ,15, 4, 2, 3, 0, 4, 0, 0, 0, 0, 0}
+
+9A [
+9  L8 V13 @15 O5
+A  L8 V11 @15 O6 \2
+;9A V0
+9A e4.d4deff4.e4egff4.e16d16c4e4e4.g4.fe
+9A e4.f&f2e4.f&f2f2e2d1
+9A ]0
+
+BC [
+B  L8 \1 V13 @15 O4
+C  L8 \1 V11 @15 O5 \2
+;BC V0
+BC a4.a4aa>dd4.<a+4a+>ddc4.c16<g16g4>c4c+4.e4.c+<a
+BC a4.>c&c2<a+4.>d&d2c+2<a2f1
+BC ]0
+
+DE [
+D L8 V13 @13 @e30 O4
+E L8 V13 @14 @e30 O4 \1
+;DE V0
+DE dfa>d<afd<aga+>dga+gd<a+>ceg>cec<ge<a>c+ec+aec+<a
+DE fa>cfc<afaga+>e<g>d<ga+ga>c+ec+aec+<adafad2
+DE ]0
+
+2 r8
+12 [
+1  L8 @e1 V12 H10,1,2,1 O5
+2  L8 @e1 V9  H10,1,2,1 O5
+;12 V0
+12 adedfded>d<ga+g>e<g>d<g>c<cecgceca<a>c+eaec+<a
+12 >ea>c<a>f<fafeg>e<g>d<ga+g>c+<a>f<a>e<a>c+<ad<a>defa>df
+12 ]0
+
+3 [
+3 L8 @e1 \-1 V13 O2
+;3 V0
+3    d((d(d ))) d((d(d&d4 ))) g((g(g ))) g((g(g&g4 ))) c((c(c ))) c((c(c&c4 ))) a((a(a ))) a((a(a&a4
+3 )))f((f(f ))) f((f(f&f4 ))) g((g(g ))) g((g(g&g4 ))) a((a(a ))) a((a(a&a4 ))) d((d(d ))) d((d(d&d4
+3 ]0

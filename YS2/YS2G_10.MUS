@@ -1,0 +1,170 @@
+;[gain=1.0 name=YS2G_10 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 113
+#title { "Cavern of Rasteenie"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e1  = {1, 0, fedcbc }
+
+@e12 = {2, 0, fedcba9876543210 }
+@e13 = {2, 2, fedccbbaa9988776655443322110 }
+
+@e22 = {0, 0, ffeeddcba9876543210 }
+
+;* ロングバス2
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v16 = {20, 4,15, 2, 2, 0, 1, 1, 0, 0, 0, 0, 0
+             ,15, 2, 2, 1, 0, 4, 0, 0, 0, 0, 0}
+
+;* ロングバス3
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v18 = {25, 2,15, 2, 2, 0, 1, 2, 0, 0, 0, 0, 0
+             ,15, 2, 2, 1, 0, 4, 0, 0, 0, 0, 0}
+
+
+*0 = {Y6,255Y7,255}
+*1 = {Y14,32}
+
+#macro_offset {f=150}
+
+1 [
+1 L16 @e1 V13 O5
+1 d+<g+>c+<g+bg+>c+<g+>d+<g+>d+f+fc+d+<g+>
+1 d+<g+>g+a+>c+<f+g+d+d+<g+>c+<g+>d+<g+>c+d+
+1 e<a>d<a>c<a>d<a>e<a>egf+de<a>
+1 e<a>ab>d<gaee<a>d<a>e<a>de
+1 fc+d+cc+<a+>c<g+a+>cd+fa+d+fc+
+1 ecd<b>c<abgab>deadec
+1 @e1 V13
+1 [ d+d+(]6 ))) d+)g+)a+)>c+ [ d+d+(]8
+1 V13 @e1 O7
+1 [d+<bg+>c+<a+f+bg+d+a+f+c+d+<bg+>c+<a+f+bg+d+a+f+c+>>]8
+1 [
+1   [ec+<b>c+<a+bg+c+d+ec+<b>c+<a+bg+c+d+>>]2
+1   [d+<bg+>c+<a+f+bg+d+a+f+c+d+<bg+>c+<a+f+>>]2
+1 ]2
+1 ]0
+
+2 [
+2 L16 \1 @e1 V11 O5
+2 d+<g+>c+<g+bg+>c+<g+>d+<g+>d+f+fc+d+<g+>
+2 d+<g+>g+a+>c+<f+g+d+d+<g+>c+<g+>d+<g+>c+d+
+2 e<a>d<a>c<a>d<a>e<a>egf+de<a>
+2 e<a>ab>d<gaee<a>d<a>e<a>de
+2 fc+d+cc+<a+>c<g+a+>cd+fa+d+fc+
+2 ecd<b>c<abgab>deadec
+2 @e1 V13
+2 [ c+c+(]6 ))) d+)g+)a+)>c+ [c+c+(]8
+2 V11 @e1 O7
+2 [d+<bg+>c+<a+f+bg+d+a+f+c+d+<bg+>c+<a+f+bg+d+a+f+c+>>]8
+2 [
+2   [ec+<b>c+<a+bg+c+d+ec+<b>c+<a+bg+c+d+>>]2
+2   [d+<bg+>c+<a+f+bg+d+a+f+c+d+<bg+>c+<a+f+>>]2
+2 ]2
+2 ]0
+
+C r16
+C [
+C L16 \-1 @4 @e1 V11 O6
+C d+<g+>c+<g+bg+>c+<g+>d+<g+>d+f+fc+d+<g+>
+C d+<g+>g+a+>c+<f+g+d+d+<g+>c+<g+>d+<g+>c+d+
+C e<a>d<a>c<a>d<a>e<a>egf+de<a>
+C e<a>ab>d<gaee<a>d<a>e<a>de
+C fc+d+cc+<a+>c<g+a+>cd+fa+d+fc+
+
+C ecd<b>c<abgab>deade
+C V13 <
+C [ g+g+(]6 )) g+>d+)g+)a+))
+C [ g+g+(]8 r16
+C V11 O8
+C [d+<bg+>c+<a+f+bg+d+a+f+c+d+<bg+>c+<a+f+bg+d+a+f+c+>>]8
+C [
+C   [ec+<b>c+<a+bg+c+d+ec+<b>c+<a+bg+c+d+>>]2
+C   [d+<bg+>c+<a+f+bg+d+a+f+c+d+<bg+>c+<a+f+>>]2
+C ]2
+C ]0
+
+A r8
+9A [
+9  L16 @16 V14 O2
+A  L16 @16 V13 O2 \2
+9A g+1g+1a1a1
+9A a+1a1g+1g+2&g+8
+9  V14 @11 O5
+A  V12 @11 O5
+9A g+8a+8>c+8
+9A [ d+2.&d+4.g+8a+8>c+8<b2.&b4. | a+8b8>c+8d+4&d+1&d+1&d+2r4<]2
+9A >c+8<a+8f+8g+4&g+1&g+1&g+2r4
+9A [e4g+8b1&b2a+8b8>c+8d+4&d+1&d+1<]2
+9A ]0
+
+DE [
+D  L16 @16 V13 O2 \1
+E  L16 @16 V12 O2 \-1
+DE g+1g+1a1a1
+DE a+1a1g+1g+1
+D  V14 @18 \0
+E  V14 @18 \-65
+DE [g+1&g+2]8
+D  V13 @16 O2 \0
+E  V11 @16 O2 \1
+DE [ e2.&e4.e2.&e4.g+2.&g+4.g+2. &g+4.]2
+DE ]0
+
+F *1
+F [
+F L16 V15 H0,20,0,-15 SO Q1 O4
+F [r1]8
+F [r1]5 r2. f+f+d+<b>
+F [r1]5 r2r f+f+f+d+d+<bb>
+F [r1]8 r2. f+f+d+<b>
+F ]0
+
+3B [
+3 L16 @e13 V14 O1
+B L16 @10  V15 H0,10,0,-5 O1 @e22
+3B  [f8ff8(((f)f)f) f((f8))f((f8))f((f( f)f)f)f((ff8))f((ff))f8((f))f8((f))]3
+3B    [f8ff8(((f)f)f) f((f8))f((f8))f((f))]2
+3B    [
+3B      [[f8ff8(((f)f)f)f((ff))f]3 f((f8))f8 | ((f)f)f((ff8))f]2 | ((f)f)f
+3       @e12 ffff @e13
+B       r4
+3B    ]2
+3   ) @e12 fffffff @e13
+B   ) r4..
+3B (  [f8ff8(((f)f)f)f((ff))ff((ff8))f8((f | f8f)f)f]6 f)))
+3  @e12 ffff @e13
+B  r4
+3B ]0

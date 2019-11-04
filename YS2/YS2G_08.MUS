@@ -1,0 +1,151 @@
+;[gain=1.0 name=YS2G_08 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 110
+#title { "Noble District of Toal"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e1  = {1, 0, fedcbc }
+@e2  = {1, 0, ff=20,f8=120}
+@e3  = {1, 0, ff=5,f8=60}
+
+@e10 = {2, 0, db975310 }
+@e11 = {2, 5, fdb975310 }
+@e12 = {2, 0, f0=120 }
+
+@e20 = {0, 0, df}
+@e21 = {0, 0, db975310 }
+@e22 = {0, 0, fedcba9876543210 }
+
+;* ベル
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = { 5, 4,15, 1, 1, 1, 3, 7, 0, 0, 0, 0, 1
+             ,15, 2, 1, 3, 0, 1, 0, 0, 0, 0, 0}
+
+;* D.ギター
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v16 = { 2, 2,13, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0
+             ,15, 0, 0, 0, 0, 7, 0, 1, 0, 0, 1}
+             
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v17 = {20, 1,15, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0
+             ,13, 2, 1, 0, 0, 7, 0, 0, 0, 0, 1}
+
+;* ブラス
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v18 = {25, 7,15, 2, 3, 0, 0, 1, 0, 0, 0, 0, 0
+             ,10, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0}
+
+*0 = {y6,255y7,255}
+
+9A [
+9  L16 V14 @16 H10,1,2,3 O5
+A  L16 V12 @16 H10,1,2,3 O6 \-1
+9A [
+9A   [r8 edefga&a8gag8fgf8ede2.&erd8e2.&erd8e2.]2
+9    *0 @18 H10,1,2,2 V14 O6
+A       @18 H10,1,2,2 V12 O6
+9A   c64c+64d16.&d4.<a8b8>c8e8c+32d32&d8.<a4&a8b8>c8e8c64c+64d16.&d4.<a+8>c8d8e8f4d4<a+4g4
+9    *0 @15 V13 H10,1,2,2 O4
+A       @15 V11 H10,1,2,2 O4
+9A   aa+aa+a4.a+8>c8<a+8aa+aa+a4.a+8>c8c+8dd+dd+d4.d+8f+8d+8dd+dd+d2.
+9    L16 V14 @17 H10,1,2,2 O5
+A    L16 V12 @17 H10,1,2,2 O6
+9A ]2
+9A ]0
+
+B [
+B L16 V12 @16 H10,1,2,3 O5 \1
+B [r
+B   [r8 edefga&a8gag8fgf8ede2.&e8d8e2.&e8d8e2.]2
+B   @18 H10,1,2,2 V12 O7
+B   d2&d<a8b8>c8e8d4<a4&a8b8>c8e8d2<a+8>c8d8e8f4d4<a+4g8
+B   @15 V12 H10,1,2,2 O4
+B   g8 g8g4.g8a8g8d+8d+8d+4.a8a8a8f+gf+gf+4.g8a8g8f+gf+gf+2.
+B   L16 V12 @17 H10,1,2,2 O5
+B ]2
+B ]0
+
+DE [
+DE [
+D     L16 V13 @13 H10,1,2,2 O2
+E     L16 V13 @14 H10,1,2,2 O2 \1 @e20
+DE    [ a8((a8(a8)))a8((a8(a8)))a8((a8))]4
+DE  > [ c8((c8(c8)))c8((c8(c8)))c8((c8))]4
+DE    [ d8((d8(d8)))d8((d8(d8)))d8((d8))]2
+DE  < [ a+8((a+8(a+8)))a+8((a+8(a+8)))a+8((a+8))]2
+DE  > d+8((d+8(d+8)))d+8((d+8(d+8)))d+8((d+8))f+8((f+8(f+8)))f+8((f+8(f+8)))f+8((f+8))
+DE    [ d8((d8(d8)))d8((d8(d8)))d8((d8))]2
+DE ]2
+DE ]0
+
+1 [
+1 [
+1   L16 V11 @e3 H10,1,2,1 O5
+1   r8 c<b>cdee8.eed8ddc8c<bb8>c8&c2.<b4>c2.<b4>c2 r8c<b>cdef8.efe8ded8c<bb8>c8&c2.<b4>c2.<b4>c2
+1   < [ @e3 afga @e2 > c&c4 @3 < fgfafgf]2 
+1   a+fga @e2 a+&a+4 @e3 fgfa+fa+f @e2 >d4<a+4g4d4
+1   V11 @e1
+1   >>[ d+gaa+]4
+1     [ d+f+a>c<]4
+1   > [ d<af+ad<af+ad>d<c>c<a>a<f+>f+>]2
+1 ]2
+1 ]0
+
+2 [
+2 [
+2   L16 \1 V9 @e3 H10,1,2,1 O5
+2   r4rc<b>cdee8.eed8ddc8c<bb8>c8&c2.<b4>c2.<b4>c2
+2   r8c<b>cdef8.efe8ded8c<bb8>c8&c2.<b4>c2.<b4>c4&c
+2   V11
+2   < [ @e3 fdef @e2 a&a4 @e3 dedfded]2
+2   fdef @e2 g&g4 @e3 dedfdgd @e2 a4f4d4<a+4
+2   @e2
+2   O3 aa+aa+a4.a+8>c8<a+8aa+aa+a4.a+8>c8c+8dd+dd+d4.d+8f+8d+8dd+dd+d2.
+2 ]2
+2 ]0
+
+3 [
+3 [
+3   L16 H0,1,0,5 O5
+3   [ @e12 V12 O4 n30 c4
+3     @e2  O7 e32b64>(c64 < [ b32((]6
+3     @e12 V12 n20 O4 c8 n0 c4 n5 c8
+3     @e2  V10 [ O2 e32b32]4
+3     @e12 V12 n30 O4 c8
+3     @e2  V10 [ O2 e32b32]4
+3     @12  V12 n20 O4 c4 n0 c8
+3   ]8
+3 ]
+3 ]0

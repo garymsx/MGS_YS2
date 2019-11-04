@@ -1,0 +1,148 @@
+;[gain=1.0 name=YS2G_13 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 140
+#title { "Ice Ridge of Noltia"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e2  = {1, 0, fed }
+@e3  = {1, 0, feeedddc,c8=60}
+
+@e10 = {2, 0, eca86420 }
+@e11 = {2,10, fdb975310 }
+
+@e20 = {0, 0, df}
+@e21 = {0, 0, ffedcba }
+
+;* D.ギター
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = { 2, 2,13, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0
+             ,15, 0, 0, 0, 0, 7, 0, 1, 0, 0, 1}
+
+;* ベル
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v16 = {25, 6,15, 3, 0, 3, 0, 6, 0, 0, 0, 0, 1
+             ,15, 3, 0, 3, 0, 2, 0, 0, 0, 0, 0}
+
+*0 = {Y6,255 Y7,255}
+*1 = {Y14,32}
+
+F r16
+9AF [
+9  L16 @6 V13 O5 H5,1,2,2
+A  L16 @9 V12 O6 H5,1,2,2 \-1  @e20
+F  L16 @6 V11 O5 H15,1,2,4 \1
+9AF c4cd+ga+>d2.g4f4c4d2.d+dd+fd8<g>d8.gfg2
+9AF d2c2d+8.f8.g8f8.d+8.<a+8>c2gfg2.&g8<g+a+>cdd+dc<a+
+9AF >c2<g+a+>cdd+4cdd+fg2&g8fd+f8.g&g2<f8.g1 r
+9  *0 @16 V13 O5
+A     @16 V11 O6
+F     @16 V11 O5
+9AF c4.<a+>c<g2>c4.cdd+8.d8.c8d4.cd<a+4.b4.>c8d4f8d+8d8
+9AF c4.<a+>c<g2>c4.cdd+8.f8.g8f2a+2>c1
+9  *0 @15 V14 O6
+A     @15 V12 O7
+F     @15 V12 O6
+9AF c2.cdd+fd2.gfd+dd+2.<gfd+dd+1
+9AF <g+2.g+g+a+>cd2d+4f4f8.d+&d+2&d+8dd+f [ dd+f((]4
+9AF V+8 gg+a+>c2.cdd+fd2.gfd+dd+2.<gfd+dd+1
+9AF <g+2.g+g+a+>cd2d+4f4d+dc4.&c2<g8.a8.b8b8.>c8.d8
+9AF ]0
+
+C  r16
+BC [
+B  L16 @15 H10,1,2,2 V14 O5
+C  L16 @15 H10,1,2,2 V12 O5 \1
+;BC V0
+BC g2.>cd+g4.>d4c4<f4g2.g+gg+a+g8dg8.&g4>dcd4
+BC <g2g2>c8.d8.d+8d8.c8.<f8g2.>d+dd+2&d+8<fgg+a+>c<a+g+g
+BC g+2fgg+a+>c4<g+a+>cdd+2&d+8dcc8.d&d2<c8.d1 r
+B  @9 V13 O5 @e20
+C  @9 V11 O5 @e20
+BC g4.fgc2g2>c4g4f4.d+fd4.d4.d+8f4g+8g8f8
+BC <g4.fgc2g2>c8.d8.d+8d2f2g1
+B  @15 V12 r4 O6
+C  @15 V10 r4 O6
+BC c2.cdd+fd2.gfd+dd+2.<gfd+dd+1
+BC <g+2.g+g+a+>cd2d+4f4f8.d+&d+2&d+8dd+f [ dd+f((]4
+BC V+8 gg+a+>c2.cdd+fd2.gfd+dd+2.<gfd+dd+1
+BC <g+2.g+g+a+>cd2d+4f4d+dc8&c2 <b8.>c8.d8d8.d+8.f8
+BC ]0
+
+DE [
+D  L16 @13 V13         O3
+E  L16 @10 V13 \1 @e21 O3
+DE   [ crcc ]4 < [ a+ra+a+]4 [g+rg+g+]4 [ grgg]3 g+g+a+a+
+DE > [ crcc ]8 < [ g+rg+g+]7 g+>g+<g>g [ frff]8
+DE   [ grgg]4 < [ grgg]4 > [ crcc]4 < [ g+rg+g+]4 [a+ra+a+]4 [ grgg]3 ggab
+DE > [ crcc]4 < [ g+rg+g+]4 [ a+ra+a+]4 > [ crcc]3 >c<ccc
+DE < [ g+4>cd+g+8&g+4.<g+g+a+4>dfa+8&a+4.<a+a+>c4c>c<c2<gg>c4c>c<c8fd+dd+c<a+g8]3
+DE   g+4>cd+g+8&g+4.<g+g+a+4>dfa+8&a+4.<a+a+>c8.cd+dc8cd+dd+fd+dd+<g8.a8.b8b8.>c8.d8
+DE ]0
+
+1 [
+1 L16 @e2 V12 O4
+1 c4.d+g>c2<a+2f4a+4g1<g2.g+8a+8
+1 >d+2f2g2>c2d+2.c<a+>c2&c8<c4d4
+1 d+1f2g2a8.b&b2<a8.b1r
+1 @e3 O5 c1c1d2.&d8d8&d2d8d8d+8f8
+1 c1c1d1d+1
+1 O5 [ O4 g+8d+g+>c4d+8cd+g+4<a+8fa+>d4f8dfa+4c8d+g>c2<d+dc<a+g1
+1 ]3
+1 O4 g+8d+g+>c4d+8cd+g+4<a+8fa+>d4f8dfa+4c1<g8.g8.g8g8.a8.b8
+1 ]0
+
+2 [
+2 L16 @e2 V11 \1 O4
+2 c4.d+g>c2<a+2f4a+4g1<g2.g+8a+8
+2 >d+2f2g2>c2d+2.c<a+>c2&c8<c4d4
+2 d+1f2g2a8.b&b2<a8.b1r
+2 @e3 O5 d+1d+1<a+2.&a+8b8&b2b8b8>c8d8
+2 d+1d+1<a+1>c1
+2 O5 [ O4 g+8d+g+>c4d+8cd+g+4<a+8fa+>d4f8dfa+4c8d+g>c2<d+dc<a+g1
+2 ]3
+2 O4 g+8d+g+>c4d+8cd+g+4<a+8fa+>d4f8dfa+4c1<g8.g8.g8g8.a8.b8
+2 ]0
+
+3 [
+3 L16 V13
+3 [ @e10 crcc @e11 cr @e10 cc]15
+3 crcc @e11 cccc [ @e10 crcc @e11 cr @e10 cc]7
+3 @e11 c @e10 cc @e11 ccccc [ @e10 crcc @e11 cr @e10 cc]14
+3 [ @e11 cr @e10 cc]3
+3 @e11 crcc [ [ @e10 c4cc @e11 c4 @e10 cccc @e11 cc]3
+3 @e10 cccc @e11 c4 @e10 cccc @e11 c @e10 ccc]3
+3 [ @e10 c4cc @e11 c4 @e10 cccc @e11 cc]3
+3 @e10 c8.c8.c8 @e11 c8.c8.cc
+3 ]0

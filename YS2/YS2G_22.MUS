@@ -1,0 +1,104 @@
+;[gain=1.0 name=YS2G_22 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 125
+#title { "Don't Go So Smoothly"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e3  = {1, 0, fedc }
+
+@e10 = {2, 0, fdb975310 }
+@e13 = {2, 4, fe,n3,dc,n2,cb,n1,ba,n0,a9988776655443322110 }
+
+;* D.ギター
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = { 1, 2,15, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0
+             ,12, 0, 0, 0, 0, 8, 0, 1, 0, 0, 1}
+             
+1 r2
+1 [
+1   V9 @e0 O4
+1   a2 g2 f2 g2 a2 g2 f2 e2 f2
+1   e2 d2 c2 d2 e2 f2 e2
+1 ]0
+
+2 r2
+2 [
+2   V9 @e0 O4
+2   f2 e2 d2 e2 f2 e2
+2   d2 c1&c2 <a+1&a+2 >c1&c2
+2 ]0
+
+3 V13 L16 O3
+3 @e10gr>@e13bbggV+gg<
+3 [
+3   V13
+3   [@e10gr>@e13gr<@e10gr>@e13g<@e10gr@e13g>@e13gr<@e10gr>@e13gr<]4
+3   [@e10gr>@e13gr<@e10gr>@e13g<@e10g|r@e10g>@e13gr<@e10gr>@e13gr<]4
+3   >@e13ggggV+ggggV-<
+3 ]0
+
+E r2
+E [
+E   V9 @4 O5
+E   d2&c2&<a2&>c2&d2&c2
+E   <a2&g1&g2&f1&f2&g1&g2
+E ]
+
+9 V14 @15 O5    L16 H10,2,0,2
+A V12 @15 O5 \1 L16 H10,2,0,2 r
+B V12 @15 O6 \2 L16 H10,2,0,2
+9AB r4 a8&a_d8
+9AB [
+9AB   [fa>d8.ef<a b8g>d8c+<a8]4
+9AB   [g2.&g8&g8>g2&g32r32gfefefg<]2
+9AB ]0
+
+CD r2
+CD [
+C    V13 @13 O3 L16
+D    V14 @10 O3 L16 @e3 \2 H4,2,0,2
+CD   [d8cd8cdc]7 d>d<e>e<f>f<d>d<
+CD   [[crcc8>c<cc]3|c>c<a+aa+aa+>c<]2
+CD   crcc8>c<c>c<
+CD ]0
+
+F Y14,32
+F V14 SO Q1 H0,32,0,-20 L16 O3
+F gr>bbggV+gg<
+F [
+F   [gr>gr<gr>g<grg>gr<gr>gr<]4
+F   [gr>gr<gr>g<g|rg>gr<gr>gr<]4
+F   >ggggV+ggggV-<
+F ]0

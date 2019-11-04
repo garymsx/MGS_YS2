@@ -1,0 +1,118 @@
+;[gain=1.0 name=YS2G_05 duration=300s fade=5s]
+; The line above defines the extra options for MSXplay.js. 
+; gain    : specify the volume gain of the playback. It is just linear multiplier, not dB.
+; name    : specify the name of the mml, use as the base download filename.
+; duration: specify the length of the song.
+; fade    : specify the fade time.
+#opll_mode 0
+#tempo 110
+#title { "May I Help You?"}
+
+;マシンID
+; 1:SONY製マシン
+; 2:Panasonic製マシン
+; 3:SANYO製マシン
+;#machine_id 0
+
+;LFOのモード。1を指定するとLFOの速度が若干速めになります。初期値は0です。
+;#lfo_mode 0
+
+;トラックバッファを割り当てます。
+;#alloc 0=1000
+;#alloc { 3=100
+;        ,5=256
+;       }
+
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
+; *a10
+;#macro_offset <定義文字 = no>
+#macro_offset a = 100
+#macro_offset b = 120
+#macro_offset c = 140
+#macro_offset d = 160
+#macro_offset e = 180
+#macro_offset f = 200
+#macro_offset r = 220
+
+@e0  = {1, 0, f }
+@e1  = {1, 0, fedcbc }
+
+@e10 = {2, 0, db975310 }
+@e11 = {2, 5, fdb975310 }
+@e12 = {2, 0, fedcba9876543210 }
+
+@e20 = {0, 0, ffedcba}
+@e21 = {0, 0, db975310 }
+@e22 = {0, 0, fedcba9876543210 }
+@e23 = {0, 0, fffffffffffffff0 }
+
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v15 = {30, 7,15, 8, 9, 1, 0, 6, 0, 0, 0, 1, 1
+             ,15, 3, 3, 2, 0, 1, 0, 0, 0, 1, 0}
+
+;* D.ギター
+;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
+@v16 = { 2, 2,13, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0
+             ,15, 0, 0, 0, 0, 7, 0, 1, 0, 0, 1}
+
+*0 = {Y49,255 Y50,255 Y6,255 Y7,255}
+
+#macro_offset {f=150}
+2 [
+2 L16 V11 @e1 O4 
+2 [ br>er<g+r>g+f+erc+edr<g+>g+erc+ed<g+>g+f+erf+ed<g+ | g+a ]2
+2 g+8 [ br>f+r<g+g+gg+]2
+2 br>f+r<g+ab>c+d+ef+g+ H0,1,2,3 a4 HF
+2 ]0
+
+3 [
+3 L16 V11 @e1 O3
+3 [ g+8b8e8d8c+8a8c+8<b8>]4
+3 [ f+rdrbba+b]2
+3 f+rdref+g+af+g+ab>c+d+ef+
+3 ]0
+
+C [
+C L16 V11 @e1 O3
+C [ erg+r<br>bag+reg+f+r<b>bg+reg+f+<b>bag+rag+f+<b | b>c+]2
+C b8 > [ drareed+e]2
+C drar<b>c+d+ef+g+ab>c+8.r ;v12@e12c
+C ]0
+
+B  r16
+9AB [
+9   *0 L16 V14 @15 O5
+A      L16 V12 @15 O6 \-1
+B      L16 V12 @15 O5 \1
+9AB [ g+rbrer>edc+r<a>c+<bre>ec+r<a>c+<be>edc+rdc+<be | ef+]2 e8
+9   *0 @16 V14 O6
+A      @16 V12 O7
+B      @16 V12 O6
+9AB f+8df+e32r32<ba+bf+8df+e32r32<ed+e>f+8df+ef+g+ab>c+d+e H0,1,2,4 f+4 HF
+9AB ]0
+
+DE [
+D  L16 V13 @13      O3
+E  L16 V13 @10 @e20 O3 \1 H0,1,1,4
+DE [e8>e8<]16
+DE O3 d8rdr8erdrf+re>ed+e<d8rdr8e8f+rf+raf+d8
+DE ]0
+
+F [
+F Y14,32 L16 V14 H0,60,0,-15 O3 SO Q1 @e23
+F [ grrr  >grrr< grrr >grer<]4
+F [ grrg rr>g<r gr | rr>g<rrr]2 > gger<br
+F ]0
+
+;G [
+;G L16 @14 V14 O2 SO Q1
+;G [ @e22c@e21ccc  @e22c@e21ccc @e22c@e21ccc @e22c@e21c@e22c@e21c]4
+;G [ @e22c@e21cc@e22c @e21cc@e22c@e21c @e22c@e21c | cc@e22c@e21ccc]2 @e22cccrcr
+;G ]0
+
+1 [
+1 L16 V12 O3
+1 [ @e12g@e10ccc  >@e12g@e10ccc< @e12g@e10ccc >@e12g@e10c@e12e@e10c<]4
+1 [ @e12g@e10cc@e12g @e10cc>@e12g<@e10c @e12g@e10c | cc>@e12g<@e10ccc]2 > @e12gger<b@e10c
+1 ]0
