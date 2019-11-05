@@ -113,12 +113,6 @@ DE   [ g]8
 DE    gg+gfd+fed
 DE ]0
 
-;B [
-;B [r1]14
-;B L16 @11 @e22 V15 H0,40,0,-15 Q1 SO [r2.r O4 a8f]2
-;B r1&r4. O4 aaggee<bbr8
-;B ]0
-
 F [
 F Y14,32
 F L16 V14 H0,40,0,-15 O3 Q1 SO
