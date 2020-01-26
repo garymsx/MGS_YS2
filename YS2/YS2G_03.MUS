@@ -8,16 +8,16 @@
 #tempo 90
 #title { "Too Full With Love"}
 
-;�g���b�N�o�b�t�@�����蓖�Ă܂��B
+;トラックバッファを割り当てます。
 ;#alloc 0=1000
 ;#alloc { 3=100
 ;        ,5=256
 ;       }
 
-;1�����̉p����(A-Z)�Ƀ}�N���̃I�t�Z�b�g�ԍ����`���܂��B
-; a = 10�ƒ�`��`�����ꍇ�ꍇ�A�ȉ��ȉ���*20�Ɠ��ӂɂȂ�B
+;1文字の英文字(A-Z)にマクロのオフセット番号を定義します。
+; a = 10と定義定義した場合場合、以下以下は*20と同意になる。
 ; *a10
-;#macro_offset <��`���� = no>
+;#macro_offset <定義文字 = no>
 #macro_offset a = 100
 #macro_offset b = 120
 #macro_offset c = 140
@@ -32,7 +32,7 @@
 @e3  = {1, 0, e,ff=20,f8=120}
 @e5  = {1, 0, ffeed}
 
-;* �����O�o�X2
+;* ロングバス2
 ;       TL FB AR DR SL RR KL MT,AM,VB,EG,KR,DT
 @v16 = {20, 4,15, 2, 2, 0, 1, 1, 0, 0, 0, 0, 0
              ,15, 2, 2, 1, 0, 4, 0, 0, 0, 0, 0}
